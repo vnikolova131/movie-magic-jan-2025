@@ -1,7 +1,10 @@
 import { Router } from 'express' ;
-
+import movieService from "../services/movie-service.js"
 
 const movieController = Router();
+
+//import movies from '../movies.js';
+//import findOne from "../services/movie-service.js"
 
 movieController.get('/create', (req,res) => {
     res.render('create');
@@ -10,14 +13,18 @@ movieController.get('/create', (req,res) => {
 movieController.post('/create', (req,res) => {
     const newMovie = req.body;
 
-    //console.log(req.body)
-    res.end()
+    movieService.create(newMovie)
+    res.redirect('/')
 })
+
+
 
 movieController.get('/:movieId/details', (req, res) => {
 
     const movieId = req.params.movieId;
-    res.render('details')
+    const movie = movieService.findOne(movieId)
+    //movie.rating
+    res.render('details', { movie })
 })
 
 
