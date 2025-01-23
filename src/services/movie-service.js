@@ -1,12 +1,13 @@
 import movies from "../movies.js";
 import {v4 as uuid} from 'uuid';
-
+import Movie from "../models/Movie.js";
 
 export default {
     getAll(filter = {}) {
-        let result = movies;
+        //let result = Movie.find({});
 
-        if(filter.search) {
+
+      /*  if(filter.search) {
             result = result.filter(movie => movie.title.toLowerCase().includes(filter.search.toLowerCase()))
         }
 
@@ -16,11 +17,11 @@ export default {
 
         if(filter.year) {
             result = result.filter(movie => movie.year === filter.year)
-        }
-            return result;
+        }*/
+            return Movie.find({});  
     },
     findOne(movieId) {
-        const result = movies.find(movie => movie.id == movieId)
+        const result = Movie.findById(movieId)
 
         return result;
     },
